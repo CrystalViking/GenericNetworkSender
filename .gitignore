@@ -1,2 +1,5 @@
 #ignore gcc makefiles
 *.o
+
+#ignore java .class files
+*.class
