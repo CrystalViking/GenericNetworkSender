@@ -120,7 +120,6 @@ void *handle_connection(void *p_client_socket)
     bzero(message, BUFSIZ);
     recv(client_socket, message, BUFSIZ, 0);
 
-    printf("Message content: %s\n", message);
 
     char *arg1 = malloc(128 * sizeof(char));
 
@@ -129,11 +128,10 @@ void *handle_connection(void *p_client_socket)
     size_t bytes_read = 0;
 
     char *ptr = strtok(message, delim);
-    printf("[Test] ptr: %s\n", ptr);
 
     strcpy(arg1, ptr);
 
-    printf("[Test] arg1: %s\n", arg1);
+    
 
     if (strcmp(arg1, "exit") == 0)
     {
@@ -158,8 +156,6 @@ void *handle_connection(void *p_client_socket)
         close(client_socket);
         return NULL;
     }
-
-    printf("[Test] arg3: %s\n", arg3);
 
     bzero(message, BUFSIZ);
 
