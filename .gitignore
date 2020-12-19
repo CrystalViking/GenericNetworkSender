@@ -3,3 +3,6 @@
 
 #ignore java .class files
 *.class
+
+#ignore txt files
+*.txt
