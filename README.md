@@ -13,6 +13,7 @@ make mstuff
 uruchom serwer, uruchom klienta, podaj adres serwera
 
 przy udanym połączeniu w kliencie pojawi się symbol zachęty ```>>```
+
 słownik poleceń:
 
 exit - przerwanie połączenia z serwerem
