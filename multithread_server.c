@@ -116,10 +116,8 @@ void *handle_connection(void *p_client_socket)
     int fd;
     int sent_bytes = 0;
 
-    
     bzero(message, BUFSIZ);
     recv(client_socket, message, BUFSIZ, 0);
-
 
     char *arg1 = malloc(128 * sizeof(char));
 
@@ -132,11 +130,12 @@ void *handle_connection(void *p_client_socket)
     strcpy(arg1, ptr);
 
     
-
-    if (strcmp(arg1, "exit") == 0)
+    if (strncmp(arg1, "exit", 4) == 0)
     {
-        printf("server exit\n");
+        printf("client exit\n");
         close(client_socket);
+        free(arg1);
+        free(arg3);
         return NULL;
     }
 
@@ -144,6 +143,8 @@ void *handle_connection(void *p_client_socket)
     {
         printf("unknown command\n");
         close(client_socket);
+        free(arg1);
+        free(arg3);
         return NULL;
     }
 
@@ -154,6 +155,8 @@ void *handle_connection(void *p_client_socket)
     {
         printf("no file size provided\n");
         close(client_socket);
+        free(arg1);
+        free(arg3);
         return NULL;
     }
 
@@ -172,12 +175,22 @@ void *handle_connection(void *p_client_socket)
     if (stat("dummy.txt", &fileinfo) < 0)
     {
         printf("File does not exist\n");
+        fclose(fp);
+        close(client_socket);
+
+        free(arg1);
+        free(arg3);
         return NULL;
     }
 
     if (fileinfo.st_size == 0)
     {
         printf("File size is 0\n");
+        fclose(fp);
+        close(client_socket);
+
+        free(arg1);
+        free(arg3);
         return NULL;
     }
 
@@ -188,6 +201,11 @@ void *handle_connection(void *p_client_socket)
     if (send(client_socket, &fileLength, sizeof(long), 0) != sizeof(long))
     {
         printf("Error sending file size\n");
+        fclose(fp);
+        close(client_socket);
+
+        free(arg1);
+        free(arg3);
         return NULL;
     }
 
@@ -197,6 +215,11 @@ void *handle_connection(void *p_client_socket)
     if (fp == NULL)
     {
         printf("Error opening file\n");
+        fclose(fp);
+        close(client_socket);
+
+        free(arg1);
+        free(arg3);
         return NULL;
     }
 
