@@ -116,7 +116,24 @@ void *handle_connection(void *p_client_socket)
     int fd;
     int sent_bytes = 0;
 
+    bool cclient = false;
+    bool cSharpClient = false;
+
     bzero(message, BUFSIZ);
+    recv(client_socket, message, BUFSIZ, 0);
+
+    if (strcmp(message, "c") == 0)
+    {
+        cclient = true;
+        printf("working with c client\n");
+    }
+    else if (strcmp(message, "csharp") == 0)
+    {
+        cSharpClient = true;
+        printf("working with csharp client\n");
+    }
+    bzero(message, BUFSIZ);
+
     recv(client_socket, message, BUFSIZ, 0);
 
     char *arg1 = malloc(128 * sizeof(char));
@@ -129,7 +146,6 @@ void *handle_connection(void *p_client_socket)
 
     strcpy(arg1, ptr);
 
-    
     if (strncmp(arg1, "exit", 4) == 0)
     {
         printf("client exit\n");
@@ -197,17 +213,36 @@ void *handle_connection(void *p_client_socket)
     printf("File length: %ld\n", fileinfo.st_size);
 
     fileLength = htonl((long)fileinfo.st_size);
+    char fileLenString[255];
+    sprintf(fileLenString, "%ld", fileinfo.st_size);
 
-    if (send(client_socket, &fileLength, sizeof(long), 0) != sizeof(long))
+    if (cclient)
     {
-        printf("Error sending file size\n");
-        fclose(fp);
-        close(client_socket);
+        if (send(client_socket, &fileLength, sizeof(long), 0) != sizeof(long))
+        {
+            printf("Error sending file size (C client)\n");
+            fclose(fp);
+            close(client_socket);
 
-        free(arg1);
-        free(arg3);
-        return NULL;
+            free(arg1);
+            free(arg3);
+            return NULL;
+        }
     }
+    if (cSharpClient)
+    {
+        if (send(client_socket, fileLenString, sizeof(fileLenString), 0) != sizeof(fileLenString))
+        {
+            printf("Error sending file size (C# client)\n");
+            fclose(fp);
+            close(client_socket);
+
+            free(arg1);
+            free(arg3);
+            return NULL;
+        }
+    }
+    
 
     fileLength = fileinfo.st_size;
     sentTotal = 0;
