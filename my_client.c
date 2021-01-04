@@ -56,7 +56,9 @@ int main(void)
         }
         printf("Connected\n");
         
-
+        strncpy(message, "c", 1);
+        send(client_socket, message, strlen(message), 0);
+        bzero(message, BUFSIZ);
         
         printf(">>");
 
@@ -127,11 +129,14 @@ int main(void)
             fputs(buffer, fptr);
         }
 
-          fclose(fptr);
+        fclose(fptr);
+        break;
     }
 
     //fclose(fptr);
     close(client_socket);
 
-    printf("ay ay captain\n");
+    printf("closing client\n");
+    
+    return 0;
 }
