@@ -11,4 +11,8 @@
 .vscode
 bin
 obj
+.csproj
+
+#executive
+.exe
 
