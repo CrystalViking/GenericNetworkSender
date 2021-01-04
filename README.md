@@ -11,9 +11,9 @@ a zatem jest w stanie obsłużyć wielu klientów.
 
 
 Projekt został napisany w 2 językach C i C#:
-*serwer(język C)
-*klient 1(język C)
-*klient 2(język C#)
+* serwer(język C)
+* klient 1(język C)
+* klient 2(język C#)
 
 
 Jak skompilować:
