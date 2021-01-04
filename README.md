@@ -2,7 +2,8 @@
 Generic Network App for sending data between server and client(s)
 
 
-Opis programu:
+Opis projektu:
+
 Projekt składa się z dwóch części - klient i serwer. Serwer czeka na połączenie z klientem/klientami
 i w odpowiedź na zapytanie klienta generuje tekstowy plik z losowo wygenerowanymi danymi o wskazanej
 przez klienta wielkości pliku. Po otrzymaniu pliku klient kończy działanie. Serwer jest wielowątkowy,
