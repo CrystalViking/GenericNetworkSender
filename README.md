@@ -5,15 +5,15 @@ Generic Network App for sending data between server and client(s)
 Opis projektu:
 
 Projekt składa się z dwóch części - klient i serwer. Serwer czeka na połączenie z klientem/klientami
-i w odpowiedź na zapytanie klienta generuje tekstowy plik z losowo wygenerowanymi danymi o wskazanej
+i w odpowiedź na zapytanie klienta tworzy tekstowy plik z losowo wygenerowanymi danymi o wskazanej
 przez klienta wielkości pliku. Po otrzymaniu pliku klient kończy działanie. Serwer jest wielowątkowy,
 a zatem jest w stanie obsłużyć wielu klientów.
 
 
 Projekt został napisany w 2 językach C i C#:
-serwer(język C)
-klient 1(język C)
-klient 2(język C#)
+*serwer(język C)
+*klient 1(język C)
+*klient 2(język C#)
 
 
 Jak skompilować:
