@@ -84,7 +84,7 @@ namespace Client
                         //writing recieved data to file
                         string dummyFile = Combine(CurrentDirectory, "dummy_recieved.txt");
                         StreamWriter dummyText = File.CreateText(dummyFile);
-                        dummyText.Write(fileString);
+                        dummyText.Write(fileString, 0, fileSizeInt);
                         dummyText.Close();
                         done = true;
                         WriteLine("closing client");
