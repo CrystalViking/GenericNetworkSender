@@ -44,7 +44,7 @@ int main(int argc, char **argv)
 
     while (true)
     {
-        printf("Wainting for connections...\n");
+        printf("Waiting for connections...\n");
         //wait for, and eventually accept an incoming connection
         addr_size = sizeof(SA_IN);
         check(client_socket =
@@ -233,7 +233,7 @@ void *handle_connection(void *p_client_socket)
     {
         if (send(client_socket, fileLenString, sizeof(fileLenString), 0) != sizeof(fileLenString))
         {
-            printf("Error sending file size (C# client)\n");
+            printf("Error sending file size (Custom client)\n");
             fclose(fp);
             close(client_socket);
 
