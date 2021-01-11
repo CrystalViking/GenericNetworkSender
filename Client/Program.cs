@@ -44,7 +44,7 @@ namespace Client
                     message = ReadLine();
 
                     var bytes = Encoding.ASCII.GetBytes(message);
-                    var greeting = Encoding.ASCII.GetBytes("csharp");
+                    var greeting = Encoding.ASCII.GetBytes("custom");
 
                     using (var requestStream = client.GetStream())
                     {
