@@ -117,7 +117,7 @@ void *handle_connection(void *p_client_socket)
     int sent_bytes = 0;
 
     bool cclient = false;
-    bool cSharpClient = false;
+    bool customClient = false;
 
     bzero(message, BUFSIZ);
     recv(client_socket, message, BUFSIZ, 0);
@@ -127,10 +127,10 @@ void *handle_connection(void *p_client_socket)
         cclient = true;
         printf("working with c client\n");
     }
-    else if (strcmp(message, "csharp") == 0)
+    else if (strcmp(message, "custom") == 0)
     {
-        cSharpClient = true;
-        printf("working with csharp client\n");
+        customClient = true;
+        printf("working with custom client\n");
     }
     bzero(message, BUFSIZ);
 
@@ -229,7 +229,7 @@ void *handle_connection(void *p_client_socket)
             return NULL;
         }
     }
-    if (cSharpClient)
+    if (customClient)
     {
         if (send(client_socket, fileLenString, sizeof(fileLenString), 0) != sizeof(fileLenString))
         {
